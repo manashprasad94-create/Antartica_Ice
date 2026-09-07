@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Leaflet's own stylesheet — required for map tiles/controls to render correctly */
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Monospace utility for coordinate / numeric readouts (lat/long, %, nm, kts) */
+.font-data {
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Leaflet default marker icon fix for Next.js/webpack bundling.
+   We override with custom SVG markers later, but this keeps a safe fallback. */
+.leaflet-default-icon-path {
+  background-image: none;
+}
+
+/* Flat, crisp scrollbars — no soft glass tracks */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: theme("colors.surface-alt");
+}
+::-webkit-scrollbar-thumb {
+  background: theme("colors.ice.300");
+  border-radius: 0;
+}
