@@ -1,0 +1,32 @@
+# Core web framework
+fastapi
+uvicorn[standard]
+pydantic
+
+# Data handling / numerical
+numpy
+pandas
+
+# Machine learning
+scikit-learn
+xgboost
+joblib
+
+# Route optimization
+networkx
+
+# Geospatial / climate data
+xarray
+netCDF4
+pyproj
+
+# Real data source access
+cdsapi
+earthaccess
+requests
+
+# PDF report generation
+reportlab
+
+# Environment config
+python-dotenv

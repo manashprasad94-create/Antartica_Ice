@@ -1,0 +1,64 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.env/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.secret
+*.key
+
+# Packaging and build output
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+wheelhouse/
+
+# Test, coverage, and type-checker output
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.mypy_cache/
+.pyre/
+.ruff_cache/
+
+# IDE and editor files
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.swp
+*.swo
+
+# Local Docker overrides and runtime files
+docker-compose.override.yml
+*.log
+*.pid
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local model and experiment outputs
+models/generated/
+mlruns/
+wandb/
+*.joblib.tmp
+*.pickle.tmp

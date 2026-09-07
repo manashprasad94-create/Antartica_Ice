@@ -1,0 +1,129 @@
+{
+  "iceberg_id": "A23A",
+  "name": "A23A",
+  "data_source": "BYU/NIC Consolidated Antarctic Iceberg Tracking Database (real observed positions, scatterometer-derived)",
+  "area_km2": 3800,
+  "note": "Positions are REAL observed data. Wind/current fields are NOT included in this source and must be separately sourced (ERA5/Copernicus Marine) for the same dates/locations to validate the physics+ML model end-to-end.",
+  "historical_path": [
+    {
+      "date": "2023-04-11",
+      "lat": -71.819,
+      "lon": -51.046,
+      "observed_displacement_km": 5.756
+    },
+    {
+      "date": "2023-04-12",
+      "lat": -71.801,
+      "lon": -51.18,
+      "observed_displacement_km": 5.006
+    },
+    {
+      "date": "2023-04-13",
+      "lat": -71.784,
+      "lon": -51.266,
+      "observed_displacement_km": 3.566
+    },
+    {
+      "date": "2023-04-14",
+      "lat": -71.767,
+      "lon": -51.346,
+      "observed_displacement_km": 3.331
+    },
+    {
+      "date": "2023-04-15",
+      "lat": -71.753,
+      "lon": -51.462,
+      "observed_displacement_km": 4.311
+    },
+    {
+      "date": "2023-04-16",
+      "lat": -71.748,
+      "lon": -51.513,
+      "observed_displacement_km": 1.854
+    },
+    {
+      "date": "2023-04-17",
+      "lat": -71.746,
+      "lon": -51.613,
+      "observed_displacement_km": 3.505
+    },
+    {
+      "date": "2023-04-18",
+      "lat": -71.744,
+      "lon": -51.759,
+      "observed_displacement_km": 5.079
+    },
+    {
+      "date": "2023-04-19",
+      "lat": -71.701,
+      "lon": -51.928,
+      "observed_displacement_km": 7.529
+    },
+    {
+      "date": "2023-04-20",
+      "lat": -71.674,
+      "lon": -51.931,
+      "observed_displacement_km": 3.015
+    },
+    {
+      "date": "2023-04-21",
+      "lat": -71.658,
+      "lon": -51.909,
+      "observed_displacement_km": 1.991
+    },
+    {
+      "date": "2023-04-22",
+      "lat": -71.661,
+      "lon": -51.897,
+      "observed_displacement_km": 0.556
+    },
+    {
+      "date": "2023-04-23",
+      "lat": -71.652,
+      "lon": -51.906,
+      "observed_displacement_km": 1.02
+    },
+    {
+      "date": "2023-04-24",
+      "lat": -71.626,
+      "lon": -51.934,
+      "observed_displacement_km": 3.11
+    },
+    {
+      "date": "2023-04-25",
+      "lat": -71.587,
+      "lon": -51.929,
+      "observed_displacement_km": 4.271
+    },
+    {
+      "date": "2023-04-26",
+      "lat": -71.573,
+      "lon": -52.089,
+      "observed_displacement_km": 5.852
+    },
+    {
+      "date": "2023-04-27",
+      "lat": -71.545,
+      "lon": -52.109,
+      "observed_displacement_km": 3.262
+    },
+    {
+      "date": "2023-04-28",
+      "lat": -71.518,
+      "lon": -52.124,
+      "observed_displacement_km": 2.992
+    },
+    {
+      "date": "2023-04-29",
+      "lat": -71.506,
+      "lon": -52.147,
+      "observed_displacement_km": 1.524
+    },
+    {
+      "date": "2023-04-30",
+      "lat": -71.479,
+      "lon": -52.286,
+      "observed_displacement_km": 5.748
+    }
+  ]
+}

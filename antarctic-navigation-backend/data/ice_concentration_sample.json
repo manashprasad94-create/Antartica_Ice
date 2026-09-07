@@ -1,0 +1,14 @@
+{
+  "note": "Representative sample grid for Bharati-Maitri corridor, illustrative concentration values consistent with typical austral winter patterns in this region. Real NSIDC/OSI-SAF data integration is a documented Phase 2 step.",
+  "region": { "center_lat": -68.5, "center_lon": 45.0, "bbox": [-71.0, 10.0, -66.0, 80.0] },
+  "lats": [-71.0, -70.0, -69.0, -68.0, -67.0, -66.0],
+  "lons": [10.0, 25.0, 40.0, 55.0, 70.0, 76.2],
+  "current_concentration_pct": [
+    [85, 70, 60, 55, 50, 45],
+    [80, 65, 55, 50, 45, 40],
+    [70, 55, 45, 40, 35, 30],
+    [60, 45, 35, 30, 25, 20],
+    [50, 35, 25, 20, 15, 10],
+    [40, 25, 15, 10, 8, 5]
+  ]
+}

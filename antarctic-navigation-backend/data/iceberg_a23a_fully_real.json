@@ -1,0 +1,271 @@
+{
+  "iceberg_id": "A23A",
+  "name": "A23A",
+  "data_source": "Positions: BYU/NIC Consolidated Antarctic Iceberg Tracking Database (real observed). Wind: ERA5 reanalysis (real observed).",
+  "area_km2": 3800,
+  "note": "Ocean current data still not sourced (documented gap) - using small placeholder current values. Wind is 100% real ERA5 data at exact iceberg coordinates/dates.",
+  "historical_path": [
+    {
+      "date": "2023-04-11",
+      "lat": -71.819,
+      "lon": -51.046,
+      "observed_displacement_km": 5.756
+    },
+    {
+      "date": "2023-04-12",
+      "lat": -71.801,
+      "lon": -51.18,
+      "observed_displacement_km": 5.006
+    },
+    {
+      "date": "2023-04-13",
+      "lat": -71.784,
+      "lon": -51.266,
+      "observed_displacement_km": 3.566
+    },
+    {
+      "date": "2023-04-14",
+      "lat": -71.767,
+      "lon": -51.346,
+      "observed_displacement_km": 3.331
+    },
+    {
+      "date": "2023-04-15",
+      "lat": -71.753,
+      "lon": -51.462,
+      "observed_displacement_km": 4.311
+    },
+    {
+      "date": "2023-04-16",
+      "lat": -71.748,
+      "lon": -51.513,
+      "observed_displacement_km": 1.854
+    },
+    {
+      "date": "2023-04-17",
+      "lat": -71.746,
+      "lon": -51.613,
+      "observed_displacement_km": 3.505
+    },
+    {
+      "date": "2023-04-18",
+      "lat": -71.744,
+      "lon": -51.759,
+      "observed_displacement_km": 5.079
+    },
+    {
+      "date": "2023-04-19",
+      "lat": -71.701,
+      "lon": -51.928,
+      "observed_displacement_km": 7.529
+    },
+    {
+      "date": "2023-04-20",
+      "lat": -71.674,
+      "lon": -51.931,
+      "observed_displacement_km": 3.015
+    },
+    {
+      "date": "2023-04-21",
+      "lat": -71.658,
+      "lon": -51.909,
+      "observed_displacement_km": 1.991
+    },
+    {
+      "date": "2023-04-22",
+      "lat": -71.661,
+      "lon": -51.897,
+      "observed_displacement_km": 0.556
+    },
+    {
+      "date": "2023-04-23",
+      "lat": -71.652,
+      "lon": -51.906,
+      "observed_displacement_km": 1.02
+    },
+    {
+      "date": "2023-04-24",
+      "lat": -71.626,
+      "lon": -51.934,
+      "observed_displacement_km": 3.11
+    },
+    {
+      "date": "2023-04-25",
+      "lat": -71.587,
+      "lon": -51.929,
+      "observed_displacement_km": 4.271
+    },
+    {
+      "date": "2023-04-26",
+      "lat": -71.573,
+      "lon": -52.089,
+      "observed_displacement_km": 5.852
+    },
+    {
+      "date": "2023-04-27",
+      "lat": -71.545,
+      "lon": -52.109,
+      "observed_displacement_km": 3.262
+    },
+    {
+      "date": "2023-04-28",
+      "lat": -71.518,
+      "lon": -52.124,
+      "observed_displacement_km": 2.992
+    },
+    {
+      "date": "2023-04-29",
+      "lat": -71.506,
+      "lon": -52.147,
+      "observed_displacement_km": 1.524
+    },
+    {
+      "date": "2023-04-30",
+      "lat": -71.479,
+      "lon": -52.286,
+      "observed_displacement_km": 5.748
+    }
+  ],
+  "environmental_conditions": [
+    {
+      "date": "2023-04-11",
+      "lat": -71.819,
+      "lon": -51.046,
+      "wind_u": 1.258209228515625,
+      "wind_v": 9.214248657226562
+    },
+    {
+      "date": "2023-04-12",
+      "lat": -71.801,
+      "lon": -51.18,
+      "wind_u": 0.8648529052734375,
+      "wind_v": -6.3586578369140625
+    },
+    {
+      "date": "2023-04-13",
+      "lat": -71.784,
+      "lon": -51.266,
+      "wind_u": -1.0678558349609375,
+      "wind_v": 1.8018951416015625
+    },
+    {
+      "date": "2023-04-14",
+      "lat": -71.767,
+      "lon": -51.346,
+      "wind_u": -2.193206787109375,
+      "wind_v": 0.5156402587890625
+    },
+    {
+      "date": "2023-04-15",
+      "lat": -71.753,
+      "lon": -51.462,
+      "wind_u": -6.838226318359375,
+      "wind_v": -1.8671875
+    },
+    {
+      "date": "2023-04-16",
+      "lat": -71.748,
+      "lon": -51.513,
+      "wind_u": -9.738494873046875,
+      "wind_v": -0.6524200439453125
+    },
+    {
+      "date": "2023-04-17",
+      "lat": -71.746,
+      "lon": -51.613,
+      "wind_u": -5.5612335205078125,
+      "wind_v": 2.24383544921875
+    },
+    {
+      "date": "2023-04-18",
+      "lat": -71.744,
+      "lon": -51.759,
+      "wind_u": 1.5146942138671875,
+      "wind_v": 5.626953125
+    },
+    {
+      "date": "2023-04-19",
+      "lat": -71.701,
+      "lon": -51.928,
+      "wind_u": 0.9627532958984375,
+      "wind_v": -3.3101959228515625
+    },
+    {
+      "date": "2023-04-20",
+      "lat": -71.674,
+      "lon": -51.931,
+      "wind_u": 0.85638427734375,
+      "wind_v": -6.280181884765625
+    },
+    {
+      "date": "2023-04-21",
+      "lat": -71.658,
+      "lon": -51.909,
+      "wind_u": -2.267181396484375,
+      "wind_v": -3.8417205810546875
+    },
+    {
+      "date": "2023-04-22",
+      "lat": -71.661,
+      "lon": -51.897,
+      "wind_u": 0.3345794677734375,
+      "wind_v": 1.765960693359375
+    },
+    {
+      "date": "2023-04-23",
+      "lat": -71.652,
+      "lon": -51.906,
+      "wind_u": -0.100128173828125,
+      "wind_v": -3.52960205078125
+    },
+    {
+      "date": "2023-04-24",
+      "lat": -71.626,
+      "lon": -51.934,
+      "wind_u": -0.165374755859375,
+      "wind_v": 6.012542724609375
+    },
+    {
+      "date": "2023-04-25",
+      "lat": -71.587,
+      "lon": -51.929,
+      "wind_u": 9.545791625976562,
+      "wind_v": 11.157363891601562
+    },
+    {
+      "date": "2023-04-26",
+      "lat": -71.573,
+      "lon": -52.089,
+      "wind_u": 9.709701538085938,
+      "wind_v": 3.8598175048828125
+    },
+    {
+      "date": "2023-04-27",
+      "lat": -71.545,
+      "lon": -52.109,
+      "wind_u": -3.0930328369140625,
+      "wind_v": 0.2751312255859375
+    },
+    {
+      "date": "2023-04-28",
+      "lat": -71.518,
+      "lon": -52.124,
+      "wind_u": -2.4393157958984375,
+      "wind_v": 5.149383544921875
+    },
+    {
+      "date": "2023-04-29",
+      "lat": -71.506,
+      "lon": -52.147,
+      "wind_u": -4.0841217041015625,
+      "wind_v": 4.8009185791015625
+    },
+    {
+      "date": "2023-04-30",
+      "lat": -71.479,
+      "lon": -52.286,
+      "wind_u": -1.646270751953125,
+      "wind_v": -0.6435546875
+    }
+  ]
+}
