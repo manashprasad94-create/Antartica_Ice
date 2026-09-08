@@ -142,7 +142,7 @@ export default function DashboardPage() {
   const dayForecast = forecast?.daily_forecasts[selectedDay];
 
   return (
-    <div className="h-screen w-screen bg-surface text-ink flex flex-col overflow-hidden">
+    <div className="min-h-screen w-screen bg-surface text-ink flex flex-col">
       {/* Top bar */}
       <header className="h-14 shrink-0 border-b border-border flex items-center justify-between px-4 md:px-6 bg-white">
         <div className="flex items-center gap-3">
@@ -175,7 +175,7 @@ export default function DashboardPage() {
           </button>
           <span className="w-px h-4 bg-border hidden sm:block" />
           <span className="font-data text-xs text-ice-600 hidden md:inline">
-            LIVE MOCK DATA
+            LIVE DATA
           </span>
           <span className="w-2 h-2 rounded-full bg-safe" />
         </div>
@@ -215,7 +215,9 @@ export default function DashboardPage() {
           {forecast && <IceForecastTrendChart dailyForecasts={forecast.daily_forecasts} />}
 
           <ExportButton
-            routeId={route ? "current-route" : undefined}
+            start={startPoint}
+            end={endPoint}
+            vessel={{ ice_class: "PC5", speed_knots: 12, fuel_rate_ton_per_nm: 0.02 }}
             onError={(message) =>
               setApiError({ error: true, message, code: "EXPORT_FAILED" })
             }

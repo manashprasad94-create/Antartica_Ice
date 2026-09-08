@@ -46,3 +46,4 @@ class RouteResponse(BaseModel):
     shortest_route: RouteDetail
     recommended_route: RouteDetail
     comparison: Comparison
+    iceberg_positions: List[dict] = []

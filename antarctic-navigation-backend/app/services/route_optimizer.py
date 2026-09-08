@@ -14,6 +14,7 @@ our research review.
 
 import numpy as np
 import heapq
+from global_land_mask import globe
 
 
 def haversine_km(lat1, lon1, lat2, lon2):
@@ -25,7 +26,7 @@ def haversine_km(lat1, lon1, lat2, lon2):
     return 2 * R * np.arcsin(np.sqrt(a))
 
 
-def build_grid(start, end, resolution=15):
+def build_grid(start, end, resolution=30):
     """Build a simple lat/lon grid spanning start->end with padding."""
     lat_min = min(start["lat"], end["lat"]) - 2.0
     lat_max = max(start["lat"], end["lat"]) + 2.0
@@ -61,6 +62,9 @@ def iceberg_risk_at(lat, lon, iceberg_predicted_path):
 
 
 def cell_cost(lat, lon, ice_grid_data, iceberg_predicted_path):
+    if globe.is_land(lat, lon):
+        return 100000  # effectively impassable - never route through land
+
     ice_cost = ice_risk_at(lat, lon, ice_grid_data)
     berg_cost = iceberg_risk_at(lat, lon, iceberg_predicted_path)
     return max(ice_cost, berg_cost)

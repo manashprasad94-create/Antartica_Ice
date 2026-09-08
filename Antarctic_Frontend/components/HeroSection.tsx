@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function HeroSection() {
   return (
     <section className="w-full bg-surface">
@@ -59,14 +61,12 @@ export default function HeroSection() {
           </div>
 
           <div className="relative w-full aspect-[4/5] lg:aspect-[3/4] bg-surface-alt border border-border overflow-hidden rounded">
-            <video
+            <Image
               className="absolute inset-0 w-full h-full object-cover"
-              src="/videos/iceberg-hero.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
+              src="/videos/WhatsApp%20Image%202026-09-07%20at%209.51.46%20PM.jpeg"
+              alt="Antarctic iceberg floating in sea ice"
+              fill
+              priority
             />
             <div className="absolute inset-0 border border-border pointer-events-none" />
           </div>

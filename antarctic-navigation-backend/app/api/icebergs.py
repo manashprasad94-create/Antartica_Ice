@@ -72,10 +72,19 @@ def get_iceberg_trajectory(iceberg_id: str, days: int = Query(default=5, ge=1, l
     conditions = data["environmental_conditions"]
     area_km2 = data["area_km2"]
 
-    # Use the last known real position + last known real wind reading
-    # as the starting point for forward prediction
+    # Use the last known real position as the starting point for forward
+    # prediction. For the wind driving the prediction, average the last
+    # 5 real wind readings (not just the single last day) to get a more
+    # representative direction/magnitude, smoothing out the sharp direction
+    # change that occurs if the very last single day happened to have an
+    # unusual wind reading compared to the recent trend.
     last_point = history[-1]
-    last_cond = conditions[-1]
+
+    recent_conditions = conditions[-5:] if len(conditions) >= 5 else conditions
+    avg_wind_u = sum(c["wind_u"] for c in recent_conditions) / len(recent_conditions)
+    avg_wind_v = sum(c["wind_v"] for c in recent_conditions) / len(recent_conditions)
+
+    last_cond = {"wind_u": avg_wind_u, "wind_v": avg_wind_v}
 
     lat, lon = last_point["lat"], last_point["lon"]
     current_u, current_v = 0.15, 0.05  # placeholder, documented gap

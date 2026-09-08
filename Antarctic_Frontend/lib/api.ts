@@ -6,6 +6,8 @@ import {
   RouteResponse,
   ApiError,
   isApiError,
+  RoutePoint,
+  VesselProfile,
 } from "./types";
 import {
   mockGetIceForecast,
@@ -127,8 +129,14 @@ export async function postRoute(
 // Returns a Blob on success so caller can trigger a download,
 // or an ApiError if something went wrong.
 
+// ── 4.5 Export report ───────────────────────────────────────────────────
+// Returns a Blob on success so caller can trigger a download,
+// or an ApiError if something went wrong.
+
 export async function exportReport(
-  routeId?: string
+  start: RoutePoint,
+  end: RoutePoint,
+  vessel: VesselProfile
 ): Promise<ApiResult<Blob>> {
   if (USE_MOCK) {
     try {
@@ -138,8 +146,11 @@ export async function exportReport(
     }
   }
   try {
-    const params = routeId ? `?route_id=${encodeURIComponent(routeId)}` : "";
-    const res = await fetch(`${API_BASE}/api/export-report${params}`);
+    const res = await fetch(`${API_BASE}/api/export-report`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ start, end, vessel }),
+    });
     if (!res.ok) {
       const data = await res.json().catch(() => null);
       return isApiError(data)

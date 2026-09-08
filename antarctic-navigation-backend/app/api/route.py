@@ -1,3 +1,12 @@
+"""
+API endpoint for route planning - Module C.
+
+Combines Module A (ice forecast) and Module B (iceberg trajectory)
+outputs into a risk-weighted cost-grid, then computes both a naive
+shortest route and a risk-aware recommended route using A* pathfinding.
+"""
+
+import numpy as np
 from fastapi import APIRouter
 from app.models.route import RouteRequest, RouteResponse, RouteDetail, Comparison, Location, RiskZone
 from app.services.route_optimizer import astar_route, compute_route_stats, ice_risk_at
@@ -5,12 +14,17 @@ from app.services.ice_forecast import forecast_ice_concentration
 from app.api.icebergs import load_iceberg_data
 from app.services.iceberg_physics import predict_drift_step
 from app.ml.drift_correction import correct_prediction
+from fastapi import HTTPException
 
 router = APIRouter()
 
 
 def get_predicted_iceberg_positions():
-    """Gather predicted positions for all tracked icebergs, for route risk assessment."""
+    """
+    Gather predicted positions for all tracked icebergs, for route risk
+    assessment. Uses the same 5-day wind averaging as the trajectory
+    endpoint to smooth out single-day wind anomalies.
+    """
     data = load_iceberg_data("a23a")
     if data is None:
         return []
@@ -19,7 +33,10 @@ def get_predicted_iceberg_positions():
     conditions = data["environmental_conditions"]
     area_km2 = data["area_km2"]
     last_point = history[-1]
-    last_cond = conditions[-1]
+
+    recent_conditions = conditions[-5:] if len(conditions) >= 5 else conditions
+    avg_wind_u = sum(c["wind_u"] for c in recent_conditions) / len(recent_conditions)
+    avg_wind_v = sum(c["wind_v"] for c in recent_conditions) / len(recent_conditions)
 
     lat, lon = last_point["lat"], last_point["lon"]
     predicted = []
@@ -27,12 +44,12 @@ def get_predicted_iceberg_positions():
         for _ in range(24):
             lat, lon, _, _ = predict_drift_step(
                 latitude_deg=lat, longitude_deg=lon,
-                wind_u=last_cond["wind_u"], wind_v=last_cond["wind_v"],
+                wind_u=avg_wind_u, wind_v=avg_wind_v,
                 current_u=0.15, current_v=0.05,
                 area_km2=area_km2, dt_seconds=3600.0,
             )
         corrected_lat, corrected_lon, _, _ = correct_prediction(
-            lat, lon, last_cond["wind_u"], last_cond["wind_v"], 0.15, 0.05
+            lat, lon, avg_wind_u, avg_wind_v, 0.15, 0.05
         )
         predicted.append({
             "lat": corrected_lat, "lon": corrected_lon,
@@ -49,11 +66,25 @@ def plan_route(request: RouteRequest):
     start = {"lat": request.start.lat, "lon": request.start.lon}
     end = {"lat": request.end.lat, "lon": request.end.lon}
     vessel = request.vessel.dict()
+    from app.services.route_optimizer import haversine_km
 
-    # Shortest route: same A* but with risk_weight near zero (ignores risk)
+    # Sanity check: if start/end are extremely far apart in longitude,
+    # our current grid-based router can't handle true circumnavigation
+    # routing around the continent - flag this clearly instead of
+    # silently returning a route that cuts through land.
+    lon_diff = abs(request.start.lon - request.end.lon)
+    if lon_diff > 70 and lon_diff < 300:  # not near the antimeridian wraparound case
+        raise HTTPException(status_code=400, detail={
+            "error": True,
+            "message": "Selected points are too far apart for direct routing in this prototype (would require circumnavigating the continent). Please select points along a similar coastal region, e.g. near Bharati-Maitri corridor.",
+            "code": "ROUTE_TOO_FAR"
+        })
+
+    # Shortest route: same A* but with risk_weight near zero (ignores ice/iceberg risk,
+    # still avoids land since land cost is effectively infinite regardless of risk_weight)
     shortest_waypoints = astar_route(start, end, ice_data, iceberg_positions, risk_weight=0.01)
     # Recommended route: full risk-aware weighting
-    recommended_waypoints = astar_route(start, end, ice_data, iceberg_positions, risk_weight=3.0)
+    recommended_waypoints = astar_route(start, end, ice_data, iceberg_positions, risk_weight=6.0)
 
     shortest_dist, shortest_fuel, shortest_time = compute_route_stats(shortest_waypoints, vessel)
     rec_dist, rec_fuel, rec_time = compute_route_stats(recommended_waypoints, vessel)
@@ -62,7 +93,6 @@ def plan_route(request: RouteRequest):
         risks = [ice_risk_at(w["lat"], w["lon"], ice_data) for w in waypoints]
         return float(np.mean(risks)) if risks else 0.0
 
-    import numpy as np
     shortest_risk = avg_risk(shortest_waypoints)
     rec_risk = avg_risk(recommended_waypoints)
 
@@ -101,4 +131,5 @@ def plan_route(request: RouteRequest):
             risk_zones=[],
         ),
         comparison=comparison,
+        iceberg_positions=iceberg_positions,
     )

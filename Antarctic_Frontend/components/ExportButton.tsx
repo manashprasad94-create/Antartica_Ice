@@ -4,20 +4,23 @@ import { useState } from "react";
 import { Download, Loader2, Check } from "lucide-react";
 import { exportReport, downloadBlob } from "@/lib/api";
 import { isApiError } from "@/lib/types";
+import type { RoutePoint, VesselProfile } from "@/lib/types";
 
 interface ExportButtonProps {
-  routeId?: string;
+  start: RoutePoint;
+  end: RoutePoint;
+  vessel: VesselProfile;
   onError: (message: string) => void;
 }
 
 type ExportState = "idle" | "loading" | "success";
 
-export default function ExportButton({ routeId, onError }: ExportButtonProps) {
+export default function ExportButton({ start, end, vessel, onError }: ExportButtonProps) {
   const [state, setState] = useState<ExportState>("idle");
 
   async function handleExport() {
     setState("loading");
-    const result = await exportReport(routeId);
+    const result = await exportReport(start, end, vessel);
 
     if (isApiError(result)) {
       setState("idle");
@@ -25,7 +28,7 @@ export default function ExportButton({ routeId, onError }: ExportButtonProps) {
       return;
     }
 
-    downloadBlob(result, `antarctic-route-report-${Date.now()}.txt`);
+    downloadBlob(result, `antarctic-route-report-${Date.now()}.pdf`);
     setState("success");
     setTimeout(() => setState("idle"), 2000);
   }
