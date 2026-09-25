@@ -1,32 +1,7 @@
-# Core web framework
-fastapi
-uvicorn[standard]
-pydantic
-
-# Data handling / numerical
-numpy
-pandas
-
-# Machine learning
-scikit-learn
-xgboost
-joblib
-
-# Route optimization
-networkx
-
-# Geospatial / climate data
-xarray
-netCDF4
-pyproj
-
-# Real data source access
-cdsapi
-earthaccess
-requests
-
-# PDF report generation
-reportlab
-
-# Environment config
-python-dotenv
+fastapi==0.141.1
+global_land_mask==1.0.0
+joblib==1.6.0
+numpy==2.5.3
+pydantic==2.13.5
+reportlab==5.0.1
+scikit_learn==1.9.1
