@@ -19,7 +19,7 @@ app = FastAPI(
 # Allow the frontend (running on localhost:3000 during dev) to call this API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://your-frontend-name.vercel.app"],
+    allow_origins=["http://localhost:3000", "https://antartica-ice.onrender.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
