@@ -1,12 +1,9 @@
 fastapi
-shapley
 joblib
-numpy
 pydantic
 reportlab
 scikit-learn
 uvicorn[standard]
-pandas
 xgboost
 networkx
 xarray
@@ -16,3 +13,6 @@ cdsapi
 earthaccess
 requests
 python-dotenv
+numpy==2.2.6
+pandas==2.2.2
+shapely==2.0.6
