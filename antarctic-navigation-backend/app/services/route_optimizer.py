@@ -14,7 +14,19 @@ our research review.
 
 import numpy as np
 import heapq
-from global_land_mask import globe
+
+# global_land_mask is memory-heavy (loads a full land grid into RAM).
+# Lazy-loaded on first use via get_land_mask() instead of at import time,
+# so it doesn't run at server boot (fixes Render free-tier OOM on deploy).
+_land_mask = None
+
+
+def get_land_mask():
+    global _land_mask
+    if _land_mask is None:
+        from global_land_mask import globe
+        _land_mask = globe
+    return _land_mask
 
 
 def haversine_km(lat1, lon1, lat2, lon2):
@@ -62,6 +74,7 @@ def iceberg_risk_at(lat, lon, iceberg_predicted_path):
 
 
 def cell_cost(lat, lon, ice_grid_data, iceberg_predicted_path):
+    globe = get_land_mask()
     if globe.is_land(lat, lon):
         return 100000  # effectively impassable - never route through land
 
