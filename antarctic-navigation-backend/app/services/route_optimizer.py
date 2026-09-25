@@ -12,21 +12,41 @@ a documented Phase 2 upgrade, per the YOLOv5-ICE-inspired approach from
 our research review.
 """
 
+import os
+import json
 import numpy as np
 import heapq
+from shapely.geometry import shape, Point
+from shapely.prepared import prep
 
-# global_land_mask is memory-heavy (loads a full land grid into RAM).
-# Lazy-loaded on first use via get_land_mask() instead of at import time,
-# so it doesn't run at server boot (fixes Render free-tier OOM on deploy).
-_land_mask = None
+# Lightweight land check using a bundled low-res coastline (Natural Earth 110m)
+# instead of global_land_mask's full-resolution global grid (was the main
+# memory hog causing OOM on Render's 512MB free tier).
+_land_geom = None
+
+_GEOJSON_PATH = os.path.join(
+    os.path.dirname(__file__), "..", "data", "ne_110m_land.geojson"
+)
 
 
-def get_land_mask():
-    global _land_mask
-    if _land_mask is None:
-        from global_land_mask import globe
-        _land_mask = globe
-    return _land_mask
+def get_land_geom():
+    """Load and cache the land polygon once (lazy, on first use)."""
+    global _land_geom
+    if _land_geom is None:
+        with open(_GEOJSON_PATH, "r") as f:
+            geojson = json.load(f)
+        # Merge all land features into a single prepared geometry for fast
+        # repeated point-in-polygon checks.
+        polygons = [shape(feature["geometry"]) for feature in geojson["features"]]
+        from shapely.ops import unary_union
+        merged = unary_union(polygons)
+        _land_geom = prep(merged)
+    return _land_geom
+
+
+def is_land(lat, lon):
+    land = get_land_geom()
+    return land.contains(Point(lon, lat))  # shapely uses (x=lon, y=lat)
 
 
 def haversine_km(lat1, lon1, lat2, lon2):
@@ -74,8 +94,7 @@ def iceberg_risk_at(lat, lon, iceberg_predicted_path):
 
 
 def cell_cost(lat, lon, ice_grid_data, iceberg_predicted_path):
-    globe = get_land_mask()
-    if globe.is_land(lat, lon):
+    if is_land(lat, lon):
         return 100000  # effectively impassable - never route through land
 
     ice_cost = ice_risk_at(lat, lon, ice_grid_data)
