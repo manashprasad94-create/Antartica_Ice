@@ -4,4 +4,15 @@ joblib==1.6.0
 numpy==2.5.3
 pydantic==2.13.5
 reportlab==5.0.1
-scikit_learn==1.9.1
+scikit-learn==1.9.1
+uvicorn[standard]
+pandas
+xgboost
+networkx
+xarray
+netCDF4
+pyproj
+cdsapi
+earthaccess
+requests
+python-dotenv
